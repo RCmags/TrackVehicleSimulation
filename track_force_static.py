@@ -15,7 +15,7 @@ import matplotlib as mpl
     #Time
 TIME_INIT   = 0
 TIME_LAST   = 85
-STEPS       = 5000
+STEPS       = 2000
 DT          = (TIME_LAST - TIME_INIT)/STEPS
 
     #Plot
@@ -41,7 +41,7 @@ NUM_Y       = 10
 
     #Gravity acceleration
 ANG_XY      = 0 
-ANG_RZ      = -30
+ANG_RZ      = 0
 GRAVITY     = 1
             #
 ANG_XY     *= math.pi/180.0
@@ -161,7 +161,7 @@ class trackForce:
             # Scan y-axis
             for y in range( 0, ny + 1 ):
                 force_y.append( fricForce( dt, vel_stat, k_stat, u_stat, u_dyn ) )                     
-            #
+            
             self.force.append( force_y )
 
     def __forceFunc( self, nx, ny, vx, vy, wz ):
@@ -201,14 +201,14 @@ class trackForce:
                 fx += 4*dfx
                 fy += 4*dfy
                 tz += 4*dtz   
-            #
+            
                 # Subinterval bounds
             for x in range( -self.NUM_X + 2, self.NUM_X - 1, 2 ):
                 [dfx, dfy, dtz] = self.__forceFunc( x, y, vx, vy, wz )
                 fx += 2*dfx
                 fy += 2*dfy
                 tz += 2*dtz
-            #
+            
                 #Bounds
             [dfx_a, dfy_a, dtz_a] = self.__forceFunc( -self.NUM_X, y, vx, vy, wz )
             [dfx_b, dfy_b, dtz_b] = self.__forceFunc( self.NUM_X, y, vx, vy, wz )
@@ -246,7 +246,7 @@ class trackForce:
         fx = ( fx + sx[0] + sx[ny] )*self.COUNT
         fy = ( fy + sy[0] + sy[ny] )*self.COUNT
         tz = ( tz + st[0] + st[ny] )*self.COUNT
-		#
+	#
         return [fx, fy, tz]        
     
 
@@ -260,7 +260,7 @@ trkR = trackForce( NUM_X, NUM_Y, WIDTH, LENGTH, DT, VEL_STAT, K_STAT, U_STAT, U_
     #Control inputs [with respect to time parameter]
 def inputVel( t ):
     vel_L = 0
-	vel_R = 0
+    vel_R = 0
     
     if t < 6:
         vel_L = 0.1
@@ -335,7 +335,7 @@ def solveMotion():
             #   Track rotation torque            Thrust torque
         tz = ( trackL[2] + trackR[2] ) + ( trackR[1] - trackL[1] )*BASE
 
-        #Integrate forces:
+        #Integrate forces: [Using Trapezoidal Rule]
             #Convert local force to global axes
         accel[0] = ( fx*cos - fy*sin )/MASS + GRAV_X
         accel[1] = ( fy*cos + fx*sin )/MASS + GRAV_Y
@@ -353,7 +353,6 @@ def solveMotion():
         #Update past values
         tz_1 = tz
         wz_1 = wz
-        
         accel_1[0] = accel[0]
         accel_1[1] = accel[1]
         vel_1[0] = vel[0]
@@ -364,7 +363,7 @@ def solveMotion():
         y.append( pos[1] )
         ang.append( theta )
     #
-	return [x, y, ang]
+    return [x, y, ang]
 
 [x, y, ang] = solveMotion()
 
