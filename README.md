@@ -1,5 +1,5 @@
 # TrackVehicleSimulation
-This is a simple 2D simulation of a tracked vehicle composed of two rectangular tracks attached to a central plate. It's written in __Python 3__.
+This is a simple 2D simulation of a tracked vehicle composed of two rectangular tracks attached to a central plate. __Note:__ t is written in __Python 3__.
 
 By track we refer to a continous belt that is in contact with the ground (also known as a tank tread). As it is in contact with the ground over a large area and not concentrated at a single point, the contact area is subdivided into a grid of contact elements. The friction force acting on these elements is then numerically integrated using simpson's rule, and these results are used as estimates for the net force and torque acting on the track. These forces are then combined under the assumption that the vehicle is a rigid body to generate the net forces acting on the vehicle.
 
