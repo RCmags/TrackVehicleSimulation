@@ -9,4 +9,4 @@ Finally, the position and orientation data is used to move a simple canvas anima
 
 Here are some examples of the script's output:
 
- <img src = "example_pics/high_coeff_anim.gif" width = "45%" height = "45%"> <img src = "example_pics/low_coeff_anim.gif" width = "45%" height = "45%">
+ <img src = "example_pics/high_coeff_anim.gif" width = "30%"> <img src = "example_pics/med_coeff_anim.gif" width = "30%"> <img src = "example_pics/low_coeff_anim.gif" width = "30%"> 
