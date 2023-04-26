@@ -1,4 +1,4 @@
-# Tracked Vehicle Simulation
+# Tracked Vehicle Simulation :tractor: :chart_with_upwards_trend:
 This is a simple 2D simulation of a tracked vehicle composed of two rectangular tracks attached to a central plate. It is written in __Python 3__.
 
 ## What it simulates
